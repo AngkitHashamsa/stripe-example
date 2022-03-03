@@ -20,8 +20,9 @@ const CheckoutForm = () => {
   const [processing, setProcessing] = useState("");
   const [disabled, setDisabled] = useState(true);
   const [clientSecret, setClientSecret] = useState("");
+
   const stripe = useStripe();
-  console.log(clientSecret);
+  // console.log(clientSecret);
   const elements = useElements();
   const cardStyle = {
     style: {
@@ -48,7 +49,7 @@ const CheckoutForm = () => {
         {
           items: [
             { id: 1, quantity: 3 },
-            { id: 1, quantity: 3 },
+            { id: 2, quantity: 3 },
           ],
         }
       );
@@ -80,6 +81,7 @@ const CheckoutForm = () => {
       setError(null);
       setProcessing(false);
       setSucceeded(true);
+      elements.getElement(CardElement).clear();
     }
   };
 
@@ -111,15 +113,6 @@ const CheckoutForm = () => {
             {error}
           </div>
         )}
-        {/* Show a success message upon completion */}
-        {/* <p className={succeeded ? "result-message" : "result-message hidden"}>
-          Payment succeeded, see the result in your
-          <a href={`https://dashboard.stripe.com/test/payments`}>
-            {" "}
-            Stripe dashboard.
-          </a>{" "}
-          Refresh the page to pay again.
-        </p> */}
       </form>
     </div>
   );
